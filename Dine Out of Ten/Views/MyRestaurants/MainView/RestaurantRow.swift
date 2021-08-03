@@ -16,8 +16,9 @@ struct RestaurantRow: View {
             VStack(alignment: .leading) {
                 Text(restaurant.name)
                     .font(.title3)
-                Text(restaurant.city)
+                Text(restaurant.locationDescription)
                     .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
             Spacer()
             Text("\(restaurant.averageRating.description)/10")

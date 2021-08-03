@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject var user = User(generateTestData: true, ordersPerItem: 10)
+    @StateObject var user = User(testOrdersPerItem: 10)
     
     var body: some View {
         NavigationView {

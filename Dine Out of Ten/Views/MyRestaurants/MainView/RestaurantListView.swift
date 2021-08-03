@@ -15,7 +15,7 @@ struct RestaurantListView: View {
     var body: some View {
         Form {
             ForEach(user.restaurants) { restaurant in
-                NavigationLink(destination: RestaurantPage(restaurant: restaurant)) {
+                NavigationLink(destination: UserRestaurantPage2(restaurant: restaurant)) {
                     RestaurantRow(restaurant: restaurant)
                 }
             }
@@ -72,7 +72,7 @@ struct RestaurantListView: View {
             case .NewItemView:
                 NewMenuItemView()
             case .NewRestaurantView:
-                NewRestaurantView()
+                NewRestaurantBySearch()
             default:
                 EmptyView()
             }
@@ -87,7 +87,7 @@ struct RestaurantListView: View {
 struct Restaurant_Previews: PreviewProvider {
     static var previews: some View {
         RestaurantListView()
-            .environmentObject(User(generateTestData: true))
+            .environmentObject(User(testOrdersPerItem: 10))
     }
 }
 

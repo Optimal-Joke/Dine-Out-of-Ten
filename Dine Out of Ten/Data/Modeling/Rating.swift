@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Rating: CustomStringConvertible {
+struct Rating {
     var value: Float
     
     init(_ value: Float) {
@@ -17,18 +17,16 @@ struct Rating: CustomStringConvertible {
     init(_ value: Int) {
         self.init(Float(value))
     }
-    
-    var description: String {
-        String(format: "%.1f", value)
-    }
 }
 
 extension Rating: Equatable, Comparable {
     static func == (lhs: Rating, rhs: Rating) -> Bool {
-        return lhs.value == rhs.value
+        lhs.value == rhs.value
     }
     
     static func < (lhs: Rating, rhs: Rating) -> Bool {
         lhs.value < rhs.value
     }
 }
+
+extension Rating: Codable { }

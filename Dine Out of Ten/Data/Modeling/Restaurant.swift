@@ -5,7 +5,6 @@
 //  Created by Hunter Holland on 12/27/20.
 //
 
-import Foundation
 import OrderedCollections
 import SwiftUI
 import MapKit
@@ -26,52 +25,70 @@ import MapKit
 //
 
 
-class Restaurant: ObservableObject, Identifiable, Taggable {    
-    let id = UUID()
+final class Restaurant: ObservableObject, Identifiable, Taggable {    
+    var id: UUID
     
-    var name: String
-    var city: String = "City"
-    var state: String = "State"
-    var stateShort: String = "ST"
-    
+    @Published var name: String
     @Published var tags = OrderedSet<Tag>()
     var menuItems = [MenuItem]()
     
-    static var example: Restaurant {
-        let ex = Restaurant(name: "Tenafly Diner", city: "Tenafly", state: "NJ")
-        let fishNchips = MenuItem(name: "Fish and Chips", description: "Cod with a side of french fries", restaurant: ex)
-        let potatoSkins = MenuItem(name: "Potato Skins", description: "Potehto boats", restaurant: ex)
-        ex.addNewOrder(of: fishNchips, withRating: 10, atPrice: 14.99, withNotes: "This was amazing")
-        ex.addNewOrder(of: potatoSkins, withRating: 5, atPrice: 5.99, withNotes: "Cammy likes this")
-        for i in 2...10 {
-            ex.addNewOrder(of: fishNchips, withRating: Int.random(in: 1...10), atPrice: Double.random(in: 10.99...17.99), withNotes: "Test Note \(i) for \(fishNchips.name)")
-            ex.addNewOrder(of: potatoSkins, withRating: Int.random(in: 1...10), atPrice: Double.random(in: 3.99...6.99), withNotes: "Test Note \(i) for \(potatoSkins.name)")
-        }
-        return ex
+    @Published var address: String
+    @Published var placemark: Placemark?
+    
+    init() {
+        self.id = UUID()
+        self.name = ""
+        self.address = ""
     }
         
     init(name: String) {
+        self.id = UUID()
         self.name = name
+        self.address = "123 Main Street, USA"
     }
     
-    convenience init(name: String, city: String, state: String) {
-        self.init(name: name)
-        self.city = city
-        self.state = state
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        tags = try container.decode(OrderedSet<Tag>.self, forKey: .tags)
+        menuItems = try container.decode([MenuItem].self, forKey: .menuItems)
+        address = try container.decode(String.self, forKey: .address)
+    }
+    
+    static var empty: Restaurant {
+        Restaurant()
     }
 }
 
-extension Restaurant: CustomStringConvertible, Equatable {
-    var description: String {
-        "\(name)"
-    }
-    
+extension Restaurant: Equatable {
     static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
-        return lhs.id == rhs.id // TODO: verify that this does indeed check for uniqueness
+        return lhs.name == rhs.name && lhs.address == rhs.address // TODO: verify that this does indeed check for uniqueness
     }
 }
 
+// MARK: - Location Information
+private extension Restaurant {
+    var city: String {
+        self.placemark?.city ?? ""
+    }
+    
+    var state: String {
+        self.placemark?.state ?? ""
+    }
+    
+    var country: String {
+        self.placemark?.country ?? ""
+    }
+}
+
+// MARK: - Display Information
 extension Restaurant {
+    var locationDescription: String {
+        placemark != nil ? "\(city), \(state)" : ""
+    }
+    
     var averageRating: Rating {
         menuItems.map { $0.averageRating }.average
     }
@@ -95,6 +112,10 @@ extension Restaurant {
     func distance(to: Restaurant) {
         
     }
+}
+
+extension Restaurant {
+    
 }
 
 

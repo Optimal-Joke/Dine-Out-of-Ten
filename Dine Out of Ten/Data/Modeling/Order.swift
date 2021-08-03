@@ -5,40 +5,40 @@
 //  Created by Hunter Holland on 5/12/21.
 //
 
-import Foundation
 import SwiftUI
 
-class Order: Identifiable {    
-    let id = UUID()
-    let dateConsumed = Date()
+struct Order: Identifiable {
+    var id: UUID
+    var dateConsumed: Date
+    var itemName: String
     
-    let item: MenuItem
     var rating: Rating
-    var price: Double?
-    var userNotes: String
+    var price: Double
+    var notes: String
     
     init(of item: MenuItem, withRating rating: Int, atPrice price: Double? = nil, withNotes notes: String?) {
-        self.item = item
+        self.id = UUID()
+        self.dateConsumed = Date()
+        
+        self.itemName = item.name
         self.rating = Rating(rating)
-        self.price = price
-        self.userNotes = notes ?? ""
+        self.price = price ?? item.priceNow
+        self.notes = notes ?? ""
     }
     
-    convenience init(of item: MenuItem, withRating rating: Int) {
+    init(of item: MenuItem, withRating rating: Int) {
         self.init(of: item, withRating: rating, atPrice: nil, withNotes: nil)
     }
 }
 
-extension Order: CustomStringConvertible, Equatable, Hashable {
-    var description: String {
-        "\(item.name), \(dateConsumed.format(dateStyle: .medium)), \(rating)"
-    }
-    
+extension Order: Equatable, Hashable {
     static func == (lhs: Order, rhs: Order) -> Bool {
         return lhs.dateConsumed == rhs.dateConsumed
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self).hashValue)
+        hasher.combine(self.hashValue)
     }
 }
+
+extension Order: Codable { }

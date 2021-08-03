@@ -15,7 +15,7 @@ struct Dine_Out_of_TenApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationTabBar()
+            MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _ in

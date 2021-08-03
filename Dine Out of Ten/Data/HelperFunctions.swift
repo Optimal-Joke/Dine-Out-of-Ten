@@ -9,16 +9,9 @@ import Foundation
 import SwiftUI
 
 // MARK: Rounding Floating Point
-extension Double {
-    func round(to places: Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
-    }
-}
-
-extension Float {
-    func round(to places: Int) -> Float {
-        let divisor = pow(10.0, Float(places))
+extension BinaryFloatingPoint {
+    func round(to places: Int) -> Self {
+        let divisor = Self(pow(10.0, Double(places)))
         return (self * divisor).rounded() / divisor
     }
 }
@@ -28,20 +21,17 @@ extension Date {
     func describeElapsedInterval() -> String {
         let interval = Calendar.current.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute], from: self, to: Date())
         
-        let description: String
-
         if let year = interval.year, year > 0 {
-            description = (year == 1) ? "\(year) year ago" : "\(year) years ago"
+            return (year == 1) ? "\(year) year ago" : "\(year) years ago"
         } else if let month = interval.month, month > 0 {
-            description = (month == 1) ? "\(month) month ago" : "\(month) months ago"
+            return (month == 1) ? "\(month) month ago" : "\(month) months ago"
         } else if let week = interval.weekOfYear, week > 0 {
-            description = (week == 1) ? "last week" : "\(week) weeks ago"
+            return (week == 1) ? "last week" : "\(week) weeks ago"
         } else if let day = interval.day, day > 0 {
-            description = (day == 1) ? "yesterday" : "\(day) days ago"
+            return (day == 1) ? "yesterday" : "\(day) days ago"
         } else {
-            description = "today"
+            return "today"
         }
-        return description
     }
     
     func format(dateStyle: DateFormatter.Style = .long) -> String {
@@ -59,7 +49,7 @@ extension Date {
     }
 }
 
-// MARK: Average Rating of Array of Ratings
+// MARK: Average of Array of Ratings
 extension Array where Element == Rating {
     var average: Rating {
         let avg = self.reduce(0.0) {
@@ -105,6 +95,7 @@ struct CustomFormEntry<Content: View>: View {
     }
 }
 
+
 // MARK: Random Color
 extension Color {
     static func random() -> Color {
@@ -116,3 +107,35 @@ extension Color {
         )
     }
 }
+
+// MARK: - Conditional View Modifier
+extension View {
+    /// Applies the given transform if the given condition evaluates to `true`.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
+        if condition() {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
+
+// MARK: - iOS Availibility Bool Ext.
+extension Bool {
+    static var iOS13: Bool {
+        if #available(iOS 13, *) { return true } else { return false }
+    }
+    
+    static var iOS14: Bool {
+        if #available(iOS 14, *) { return true } else { return false }
+    }
+    
+    static var iOS15: Bool {
+        if #available(iOS 15, *) { return true } else { return false }
+    }
+}
+

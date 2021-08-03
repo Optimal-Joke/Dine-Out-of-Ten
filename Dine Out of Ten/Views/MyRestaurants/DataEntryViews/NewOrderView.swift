@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewOrderView: View {
+    @EnvironmentObject var user: User
     var item: MenuItem
     
     @State private var orderRating = 9
@@ -35,7 +36,7 @@ struct NewOrderView: View {
                             .multilineTextAlignment(.center)
                         Text("at")
                             .font(.headline.weight(.regular))
-                        Text(item.restaurant.name)
+                        Text(restaurant.name)
                             .font(.title.weight(.heavy))
                             .multilineTextAlignment(.center)
                     }
@@ -85,9 +86,8 @@ struct NewOrderView: View {
                                         RoundedRectangle(cornerRadius: 15)
                                             .foregroundColor(i == orderRating ? Color.secondary.opacity(0.2) : Color.clear)
                                     )
-                                    .animation(
-                                        Animation.easeIn(duration: 0.1)
-                                    )
+                                    // MAKE SURE THIS WORKS PROPERLY WITH NEW value PARAMETER
+                                    .animation(.easeOut(duration: 0.1), value: i)
                                 }
                             }
                         }
@@ -123,11 +123,15 @@ struct NewOrderView: View {
         }
     }
     
-    func orderItem() {
-        item.order(withRating: orderRating, atPrice: 0.00, withNotes: orderNotes)
+    var restaurant: Restaurant {
+        user.getRestaurant(withID: item.restaurantID)
     }
     
-//    }
+    
+    
+    func orderItem() {
+        item.addOrder(withRating: orderRating, atPrice: 0.00, withNotes: orderNotes)
+    }
 }
 
 struct NewOrder_Previews: PreviewProvider {

@@ -22,11 +22,10 @@ protocol TagListModifierButton {
 extension TagListModifierButton {
     var body: some View {
         Button(buttonLabel, action: action)
-            .foregroundColor(.accentColor)
+            .foregroundColor(.black)
             .font(font)
             .padding(.horizontal, hPadding)
             .padding(.vertical, vPadding)
-            .animation(.easeInOut(duration: 0.25))
     }
     
     var buttonLabel: String {

@@ -34,7 +34,7 @@ struct CharacterProgressRing: View {
             }
         }
         .frame(width: radius)
-        .animation(.linear(duration: 0.15))
+        .animation(.linear(duration: 0.15), value: text.count)
     }
     
     var progress: Double {
@@ -114,6 +114,6 @@ extension CharacterProgressRing {
 
 struct ProgressRing_Previews: PreviewProvider {
     static var previews: some View {
-        NewTagView(item: MenuItem.example)
+        NewTagViewSheet(item: MenuItem.example)
     }
 }

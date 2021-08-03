@@ -8,16 +8,32 @@
 import Foundation
 import MapKit
 
-struct Coordinates: Hashable, Codable {
-    var lat: Double
-    var long: Double
+struct Coordinate: Codable, Hashable {
+    var latitude, longitude: Double
+}
+
+extension Coordinate {
+    init(_ coordinate: CLLocationCoordinate2D) {
+        self = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
+}
 
-let home = Coordinates(lat: 40.915283, long: -73.971697)
+extension CLLocationCoordinate2D {
+    init(_ coordinate: Coordinate) {
+        self = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+}
 
-func convertToPlacemark(coordinate: Coordinates) -> MKPlacemark {
-    let coreLocationPoint = CLLocationCoordinate2D(latitude: coordinate.lat,
-                                                   longitude: coordinate.long)
+let home = Coordinate(latitude: 40.915283, longitude: -73.971697)
+
+func convertToPlacemark(coordinate: Coordinate) -> MKPlacemark {
+    let coreLocationPoint = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
     let placemark = MKPlacemark(coordinate: coreLocationPoint)
     return placemark
 }
+
+func convertToMapItem(coordinate: Coordinate) -> MKMapItem {
+    MKMapItem(placemark: convertToPlacemark(coordinate: coordinate))
+}
+
+

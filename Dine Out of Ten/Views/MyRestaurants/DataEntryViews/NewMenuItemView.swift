@@ -120,12 +120,12 @@ struct NewMenuItemView: View {
                         if let restaurant = findRestaurant(withName: restaurantName) {
                             if let item = findItem(withName: itemName, at: restaurant) {
                                 if let actualPrice = Double(itemPrice) {
-                                    item.order(withRating: itemRating, atPrice: actualPrice, withNotes: orderComments)
+                                    item.addOrder(withRating: itemRating, atPrice: actualPrice, withNotes: orderComments)
                                 }
                             } else {
                                 let newItem = MenuItem(name: itemName, description: itemDescription, restaurant: restaurant)
                                 if let actualPrice = Double(itemPrice) {
-                                    newItem.order(withRating: itemRating, atPrice: actualPrice, withNotes: orderComments)
+                                    newItem.addOrder(withRating: itemRating, atPrice: actualPrice, withNotes: orderComments)
                                 }
                             }
                             self.presentationMode.wrappedValue.dismiss()

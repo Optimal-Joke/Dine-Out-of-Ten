@@ -60,21 +60,37 @@ struct ItemTagListViewTrailingButton: TagListViewModifierButton {
 struct UserTagListView<T>: TagListView where T: ObservableObject, T: Taggable {
     var size: TagViewSize
     var editMode: Bool = true
+    var trailingButtonMode: TagListModifierButtonMode = .stable(label: "New Tag...")
     var trailingButtonAction: () -> Void
     
     @EnvironmentObject var user: User
     @ObservedObject var item: T
     @State var totalHeight: CGFloat = 0
     
+    init(for item: T) {
+        self.item = item
+        self.size = .small
+        self.trailingButtonAction = {}
+        self.trailingButtonMode = .stable(label: "")
+    }
+    
     init(for item: T, size: TagViewSize = .small, trailingButtonAction: @escaping () -> Void) {
         self.item = item
         self.size = size
         self.trailingButtonAction = trailingButtonAction
+        self.trailingButtonMode = .stable(label: "")
     }
     
     init(for item: T, size: TagViewSize = .small, editing: Bool, trailingButtonAction: @escaping () -> Void) {
-        self.init(for: item, size: size, trailingButtonAction: trailingButtonAction)
+        self.item = item
+        self.size = size
         self.editMode = editing
+        self.trailingButtonAction = trailingButtonAction
+    }
+    
+    init(for item: T, size: TagViewSize = .small, trailingButtonMode: TagListModifierButtonMode, trailingButtonAction: @escaping () -> Void) {
+        self.init(for: item, size: size, trailingButtonAction: trailingButtonAction)
+        self.trailingButtonMode = trailingButtonMode
     }
     
     var tags: OrderedSet<Tag> {
@@ -105,7 +121,9 @@ extension UserTagListView {
         
         return ZStack(alignment: .topLeading) {
             ForEach(tags) { tag in
-                TagView(for: tag, item: item, size: size)
+                TappableTagView(for: tag, item: item, size: size) {
+                    item.addTag(tag)
+                }
                     .padding([.horizontal, .vertical], 2)
                     .alignmentGuide(.leading, computeValue: { d in
                         if (abs(width - d.width) > g.size.width) {
@@ -122,7 +140,7 @@ extension UserTagListView {
                     })
             }
             
-            TagListViewTrailingButton(size: size, tagCount: tags.count, labelMode: .stable(label: "New Tag..."), action: trailingButtonAction)
+            TagListViewTrailingButton(size: size, tagCount: tags.count, labelMode: trailingButtonMode, action: trailingButtonAction)
                 .alignmentGuide(.leading, computeValue: { d in
                     if (abs(width - d.width) > g.size.width) {
                         width = 0
@@ -147,7 +165,7 @@ extension UserTagListView {
 // MARK: ItemTagListView
 struct ItemTagListView<T>: TagListView where T: ObservableObject, T: Taggable {
     var size: TagViewSize
-    var deleteable: Bool = false
+    var deletable: Bool = false
     var trailingButtonMode: TagListModifierButtonMode = .stable(label: "Add Tag...")
     var trailingButtonAction: () -> Void
     
@@ -155,19 +173,33 @@ struct ItemTagListView<T>: TagListView where T: ObservableObject, T: Taggable {
     @State var totalHeight: CGFloat = 0
     @State private var sheetSelection: DataEntryView? = nil
     
-    init(for item: T, size: TagViewSize = .medium, trailingButtonAction: @escaping () -> Void) {
+    init(for item: T) {
+        self.item = item
+        self.size = .medium
+        self.trailingButtonAction = {}
+        self.trailingButtonMode = .stable(label: "")
+    }
+    
+    init(for item: T, size: TagViewSize) {
+        self.item = item
+        self.size = size
+        self.trailingButtonAction = {}
+        self.trailingButtonMode = .stable(label: "")
+    }
+    
+    init(for item: T, size: TagViewSize, trailingButtonAction: @escaping () -> Void) {
         self.item = item
         self.size = size
         self.trailingButtonAction = trailingButtonAction
     }
     
-    init(for item: T, size: TagViewSize = .medium, deleteable: Bool, trailingButtonAction: @escaping () -> Void) {
+    init(for item: T, size: TagViewSize, deletable: Bool, trailingButtonAction: @escaping () -> Void) {
         self.init(for: item, size: size, trailingButtonAction: trailingButtonAction)
-        self.deleteable = deleteable
+        self.deletable = deletable
     }
     
-    init(for item: T, size: TagViewSize = .medium, deleteable: Bool = false, trailingButtonMode: TagListModifierButtonMode, trailingButtonAction: @escaping () -> Void) {
-        self.init(for: item, size: size, deleteable: deleteable, trailingButtonAction: trailingButtonAction)
+    init(for item: T, size: TagViewSize = .medium, deletable: Bool = false, trailingButtonMode: TagListModifierButtonMode, trailingButtonAction: @escaping () -> Void) {
+        self.init(for: item, size: size, deletable: deletable, trailingButtonAction: trailingButtonAction)
         self.trailingButtonMode = trailingButtonMode
     }
 }
@@ -183,7 +215,7 @@ extension ItemTagListView {
         .sheet(item: $sheetSelection) { selectedTarget in
             switch selectedTarget {
             case .NewTagView:
-                NewTagView(item: item)
+                NewTagViewSheet(item: item)
             default:
                 EmptyView()
             }
@@ -196,7 +228,9 @@ extension ItemTagListView {
         
         return ZStack(alignment: .topLeading) {
             ForEach(self.item.tags) { tag in
-                TagView(for: tag, item: item, size: size, deleteable: deleteable)
+                DeletableTagView(for: tag, item: item, deletable: deletable, withDeleteConfirmation: false) {
+                    item.removeTag(tag)
+                }
                     .padding([.horizontal, .vertical], 2)
                     .alignmentGuide(.leading, computeValue: { d in
                         if (abs(width - d.width) > g.size.width) {

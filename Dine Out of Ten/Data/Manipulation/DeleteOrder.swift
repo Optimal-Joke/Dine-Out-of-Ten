@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension MenuItem {
-    func delete(order: Order) -> Order {
-        self.orders.remove(at: self.orders.firstIndex { $0 == order }!)
-    }
-}
+//extension MenuItem {
+//    func delete(order: Order) -> Order {
+//        self.orders.remove(at: self.orders.firstIndex { $0 == order }!)
+//    }
+//}
