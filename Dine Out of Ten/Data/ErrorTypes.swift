@@ -119,3 +119,10 @@ extension RestaurantCreationError.AddressInputError {
         }
     }
 }
+
+// MARK: - Location Creation Error
+enum LocationCreationError: Error {
+    case NoAddressError
+    case FailedSearchError
+    case UnknownError
+}

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 // MARK: User
 extension User {
@@ -17,8 +18,8 @@ extension User {
     internal func generateTestData(ordersPerItem: Int) {
         // Define test restaurants
         let tenaflyDiner = Restaurant(name: "Tenafly Diner")
-        tenaflyDiner.address = "16 W Railroad Ave, Tenafly, NJ 07670"
-        tenaflyDiner.placemark = Placemark(latitude: 40.92553, longitude: 73.96485)
+        tenaflyDiner.location = Location(address: "16 W Railroad Ave, Tenafly, NJ 07670")
+        tenaflyDiner.location.placemark = Placemark(coordinate: CLLocationCoordinate2D(latitude: 40.92553, longitude: 73.96485))
         
         // Add test restaurants to user
         self.restaurants.append(tenaflyDiner)
@@ -37,7 +38,7 @@ extension User {
         
         // Add tags to restaurants
         for i in 1...5 {
-            self.addTag(label: "Tag \(i)", colors: [.random(), .random()], to: tenaflyDiner)
+            self.addTag(label: "Tag \(i)", colors: [.random, .random], to: tenaflyDiner)
         }
         
         // Order once + add items to restaurants

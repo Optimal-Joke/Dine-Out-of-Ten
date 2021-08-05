@@ -12,9 +12,9 @@ struct NewRestaurantInfoView: View {
     private var customString: String?
     private var mapItem: MKMapItem?
     
-    @State private var restaurant = Restaurant()
+    @ObservedObject private var restaurant = Restaurant()
     
-    @State private var readyToSave = false
+    @State private var performChecksOnSave = true
     
     @State private var error: RestaurantCreationError?
     @State private var alertIsShowing = false
@@ -24,14 +24,13 @@ struct NewRestaurantInfoView: View {
     
     init(using customString: String = "") {
         restaurant.name = customString
-        restaurant.placemark = Placemark()
     }
     
     init(using mapItem: MKMapItem) {
         restaurant.name = mapItem.name ?? ""
-        restaurant.address = mapItem.placemark.title ?? ""
-        restaurant.placemark = Placemark(mapItem: mapItem)
-        self.readyToSave = true
+        // overwrite default location value
+        restaurant.location = Location(mapItem: mapItem)
+        restaurant.location.address = mapItem.placemark.title ?? ""
     }
     
     var body: some View {
@@ -40,7 +39,7 @@ struct NewRestaurantInfoView: View {
                 TextField("Add restaurant name", text: $restaurant.name)
                     .font(.title2)
                     
-                TextField("Address", text: $restaurant.address)
+                TextField("Address", text: $restaurant.location.address)
                     .font(.subheadline)
             }
             
@@ -54,7 +53,9 @@ struct NewRestaurantInfoView: View {
                         Spacer()
                     }
                 } else {
-                    ItemTagListView(for: restaurant, size: .small)
+                    ItemTagListView(for: restaurant, size: .medium, deletable: true, trailingButtonMode: .stable(label: "")) {
+                        
+                    }
                 }
             }
             .padding(.vertical)
@@ -95,45 +96,27 @@ struct NewRestaurantInfoView: View {
             
             switch error {
             case .AddressError:
-                return error.alert(primaryButton: Alert.Button.default(Text("Save Anyway"), action: saveRestaurantWithoutAddress), secondaryButton: Alert.Button.cancel(Text("Add Address")))
+                return error.alert(primaryButton: Alert.Button.default(Text("Save Anyway"), action: {
+                    performChecksOnSave = false
+                    saveRestaurant()
+                }), secondaryButton: Alert.Button.cancel(Text("Add Address")))
             default:
                 return error.alert()
             }
         }
     }
     
-    private func getPlacemark(from address: String,
-                              onCompletion: @escaping (Result<Placemark, RestaurantCreationError>) -> Void ) {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) { (placemarks, error) in
-            if let placemarks = placemarks {
-                // successful geocode
-                let placemark = Placemark(placemark: MKPlacemark(placemark: placemarks[0]))
-                onCompletion(.success(placemark))
-            } else if error != nil {
-                // geocoder failed
-                onCompletion(.failure(.AddressError(type: .NoPlacemarkFoundError)))
-            } else {
-                // this shouldn't be possible
-                onCompletion(.failure(.AddressError(type: .UnknownError)))
-            }
-        }
+    private func dismissView() {
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     private func addPlacemarkToRestaurant() {
-        guard restaurant.address != "" else {
-            error = RestaurantCreationError.AddressError(type: .NoAddressError)
-            alertIsShowing = true
-            return
-        }
-        
-        getPlacemark(from: restaurant.address) { result in
+        restaurant.location.getPlacemarkFromAddress() { result in
             switch result {
             case .success(let retrievedPlacemark):
                 // placemark was successfully retrieved
-                restaurant.placemark = retrievedPlacemark
-                user.restaurants.append(restaurant)
-                self.presentationMode.wrappedValue.dismiss()
+                restaurant.location.placemark = retrievedPlacemark
+                saveRestaurant()
             case .failure(let error):
                 // an error occurred
                 self.error = error
@@ -142,34 +125,35 @@ struct NewRestaurantInfoView: View {
         }
     }
     
-    private func saveRestaurantWithoutAddress() {
-        // assign empty placemark
-        restaurant.placemark = Placemark()
-        readyToSave = true
-        
-        saveRestaurant()
-    }
-    
     private func saveRestaurant() {
-        guard restaurant.name != "" else {
-            error = RestaurantCreationError.NoNameError
-            alertIsShowing = true
-            return
+        if performChecksOnSave {
+            guard restaurant.name != "" else {
+                error = RestaurantCreationError.NoNameError
+                alertIsShowing = true
+                return
+            }
+            
+            guard !user.restaurants.contains(restaurant) else {
+                error = RestaurantCreationError.RestaurantAlreadyExistsError
+                alertIsShowing = true
+                return
+            }
+            
+            guard restaurant.location.address != "" else {
+                error = RestaurantCreationError.AddressError(type: .NoAddressError)
+                alertIsShowing = true
+                return
+            }
+            
+            guard restaurant.location.placemark != nil else {
+                // for places with a user-entered address
+                addPlacemarkToRestaurant()
+                return
+            }
         }
         
-        guard !user.restaurants.contains(restaurant) else {
-            error = RestaurantCreationError.RestaurantAlreadyExistsError
-            alertIsShowing = true
-            return
-        }
-        
-        if readyToSave {
-            user.restaurants.append(restaurant)
-            self.presentationMode.wrappedValue.dismiss()
-        } else {
-            // for places with a user-entered address
-            addPlacemarkToRestaurant()
-        }
+        user.restaurants.append(restaurant)
+        dismissView()
     }
 }
 

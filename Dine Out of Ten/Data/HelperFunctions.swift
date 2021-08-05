@@ -98,13 +98,11 @@ struct CustomFormEntry<Content: View>: View {
 
 // MARK: Random Color
 extension Color {
-    static func random() -> Color {
-        return Color(
-            red:     .random(in: 0.15..<1),
-            green:   .random(in: 0.15..<1),
-            blue:    .random(in: 0.15..<1),
-            opacity: 1.0
-        )
+    static var random: Color {
+        let red = Double.random(in: 0...1)
+        let green = Double.random(in: 0...1)
+        let blue = Double.random(in: 0...1)
+        return Color(.sRGB, red: red, green: green, blue: blue, opacity: 1)
     }
 }
 
@@ -124,7 +122,7 @@ extension View {
     }
 }
 
-// MARK: - iOS Availibility Bool Ext.
+// MARK: - iOS Availability Bool Ext.
 extension Bool {
     static var iOS13: Bool {
         if #available(iOS 13, *) { return true } else { return false }

@@ -15,10 +15,10 @@ struct NewTagViewPage<T: Taggable>: View {
     @State private var tagName: String = ""
     @State private var numberOfColors: Int = 1
     
-    @State var color1: Color = .random()
-    @State var color2: Color = .random()
-    @State var color3: Color = .random()
-    @State var color4: Color = .random()
+    @State var color1: Color = .random
+    @State var color2: Color = .random
+    @State var color3: Color = .random
+    @State var color4: Color = .random
     
     let maxCharacters = 20
     

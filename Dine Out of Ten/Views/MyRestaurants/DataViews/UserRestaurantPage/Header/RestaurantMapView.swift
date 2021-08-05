@@ -14,7 +14,7 @@ struct RestaurantMapView: View {
     @State private var restaurantRegion = MKCoordinateRegion()
     
     init(restaurant: Restaurant) {
-        self.placemark = restaurant.placemark
+        self.placemark = restaurant.location.placemark
     }
     
     var body: some View {

@@ -31,6 +31,7 @@
 		3744603C26AFB9A40053DFEB /* UserRestaurantPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3744603B26AFB9A40053DFEB /* UserRestaurantPage2.swift */; };
 		3744604026AFCF7E0053DFEB /* MenuItemCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3744603F26AFCF7E0053DFEB /* MenuItemCardView.swift */; };
 		3744CC282646227F00A7459D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3744CC262646227F00A7459D /* Model.xcdatamodeld */; };
+		374929FA26BB0D2100354320 /* Disk in Frameworks */ = {isa = PBXBuildFile; productRef = 374929F926BB0D2100354320 /* Disk */; };
 		375DDC75269A1C93001CB7E9 /* CharacterProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DDC74269A1C93001CB7E9 /* CharacterProgressRing.swift */; };
 		37617FD7264A0C1700237D9F /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37617FD6264A0C1700237D9F /* Rating.swift */; };
 		37617FDF264B073500237D9F /* DineOutofTenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37617FDE264B073500237D9F /* DineOutofTenTests.swift */; };
@@ -221,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				370ED905269151E500C2E6D2 /* OrderedCollections in Frameworks */,
+				374929FA26BB0D2100354320 /* Disk in Frameworks */,
 				370ED903269151E500C2E6D2 /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +628,7 @@
 			packageProductDependencies = (
 				370ED902269151E500C2E6D2 /* Collections */,
 				370ED904269151E500C2E6D2 /* OrderedCollections */,
+				374929F926BB0D2100354320 /* Disk */,
 			);
 			productName = "Dine Out of Ten";
 			productReference = 379186A7257349DC00BA58D2 /* Dine Out of Ten.app */;
@@ -664,6 +667,7 @@
 			mainGroup = 3791869E257349DC00BA58D2;
 			packageReferences = (
 				370ED901269151E500C2E6D2 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				374929F826BB0D2100354320 /* XCRemoteSwiftPackageReference "Disk" */,
 			);
 			productRefGroup = 379186A8257349DC00BA58D2 /* Products */;
 			projectDirPath = "";
@@ -1114,6 +1118,14 @@
 				minimumVersion = 0.0.3;
 			};
 		};
+		374929F826BB0D2100354320 /* XCRemoteSwiftPackageReference "Disk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/saoudrizwan/Disk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1126,6 +1138,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 370ED901269151E500C2E6D2 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		374929F926BB0D2100354320 /* Disk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 374929F826BB0D2100354320 /* XCRemoteSwiftPackageReference "Disk" */;
+			productName = Disk;
 		};
 /* End XCSwiftPackageProductDependency section */
 
