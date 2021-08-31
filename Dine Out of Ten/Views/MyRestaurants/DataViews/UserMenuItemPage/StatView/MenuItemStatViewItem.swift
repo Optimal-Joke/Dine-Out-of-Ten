@@ -126,6 +126,7 @@ extension MenuItemStatViewItem {
 
 struct MenuItemStatViewItem_Previews: PreviewProvider {
     static var previews: some View {
-        MenuItemStatView(item: MenuItem.example)
+        MenuItemStatView()
+            .environmentObject(MenuItem.example)
     }
 }

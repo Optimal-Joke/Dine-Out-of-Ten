@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MenuItemStatView: View {
     @EnvironmentObject var user: User
-    var item: MenuItem
+    @EnvironmentObject var restaurant: Restaurant
+    @EnvironmentObject var item: MenuItem
     
     var body: some View {
         VStack {
@@ -43,9 +44,9 @@ struct MenuItemStatView: View {
         }
     }
     
-    var restaurant: Restaurant {
-        user.getRestaurant(withID: item.restaurantID)
-    }
+//    var restaurant: Restaurant {
+//        user.getRestaurant(withID: item.restaurantID)
+//    }
     
     var itemRank: Int {
         restaurant.menuItems.filter { $0.averageRating > item.averageRating }.count + 1

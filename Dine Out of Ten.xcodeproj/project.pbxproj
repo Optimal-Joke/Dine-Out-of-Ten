@@ -31,7 +31,8 @@
 		3744603C26AFB9A40053DFEB /* UserRestaurantPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3744603B26AFB9A40053DFEB /* UserRestaurantPage2.swift */; };
 		3744604026AFCF7E0053DFEB /* MenuItemCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3744603F26AFCF7E0053DFEB /* MenuItemCardView.swift */; };
 		3744CC282646227F00A7459D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3744CC262646227F00A7459D /* Model.xcdatamodeld */; };
-		374929FA26BB0D2100354320 /* Disk in Frameworks */ = {isa = PBXBuildFile; productRef = 374929F926BB0D2100354320 /* Disk */; };
+		374929FC26BC574600354320 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374929FB26BC574600354320 /* CodableTests.swift */; };
+		37492A0026BC593D00354320 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374929FF26BC593D00354320 /* Location.swift */; };
 		375DDC75269A1C93001CB7E9 /* CharacterProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DDC74269A1C93001CB7E9 /* CharacterProgressRing.swift */; };
 		37617FD7264A0C1700237D9F /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37617FD6264A0C1700237D9F /* Rating.swift */; };
 		37617FDF264B073500237D9F /* DineOutofTenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37617FDE264B073500237D9F /* DineOutofTenTests.swift */; };
@@ -57,6 +58,9 @@
 		37863CBB2574662400EF5A09 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37863CBA2574662400EF5A09 /* SettingsView.swift */; };
 		37863CBE257466B800EF5A09 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37863CBD257466B800EF5A09 /* MainView.swift */; };
 		37863CC22574941300EF5A09 /* UserRestaurantPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37863CC12574941300EF5A09 /* UserRestaurantPage.swift */; };
+		3789F8FC26D411600047E4AD /* NeumorphicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789F8FB26D411600047E4AD /* NeumorphicCard.swift */; };
+		3789F8FE26D4121B0047E4AD /* NeumorphicButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789F8FD26D4121B0047E4AD /* NeumorphicButtonStyles.swift */; };
+		3789F90026D41D9C0047E4AD /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789F8FF26D41D9C0047E4AD /* CustomColor.swift */; };
 		378C2A33265DBE67004D847E /* DataEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C2A32265DBE67004D847E /* DataEntryView.swift */; };
 		378C2A35265DCC9B004D847E /* NewOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378C2A34265DCC9B004D847E /* NewOrderView.swift */; };
 		378D37D4269F6C1900C766F6 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378D37D3269F6C1900C766F6 /* Mappable.swift */; };
@@ -69,6 +73,7 @@
 		3794DBDD264DBF96002BECCA /* AddRemoveTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3794DBDC264DBF96002BECCA /* AddRemoveTag.swift */; };
 		3794DBDF264DE9FB002BECCA /* MenuItemStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3794DBDE264DE9FB002BECCA /* MenuItemStatView.swift */; };
 		3794DBE1264DEA56002BECCA /* MenuItemStatViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3794DBE0264DEA56002BECCA /* MenuItemStatViewItem.swift */; };
+		37A235EA26D1E4AA00B4D64F /* NeumorphicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A235E926D1E4AA00B4D64F /* NeumorphicButton.swift */; };
 		37AAC586269E5385003067CC /* EditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AAC585269E5385003067CC /* EditTagView.swift */; };
 		37AAC58B269E8435003067CC /* TagListViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AAC58A269E8435003067CC /* TagListViewProtocol.swift */; };
 		37AAC58D269E8645003067CC /* TagListViewModifierButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AAC58C269E8645003067CC /* TagListViewModifierButton.swift */; };
@@ -90,7 +95,6 @@
 		37CF30C926474708001B9CEE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF30C826474708001B9CEE /* PersistenceController.swift */; };
 		37D1380E26A10E8C001EBB86 /* TagColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1380D26A10E8C001EBB86 /* TagColorPickerView.swift */; };
 		37F29FFB26ABBF050043C8E3 /* MKSearchResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F29FFA26ABBF050043C8E3 /* MKSearchResultsListView.swift */; };
-		37F29FFE26AE350E0043C8E3 /* Placemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F29FFD26AE350E0043C8E3 /* Placemark.swift */; };
 		37F2A00026AE392C0043C8E3 /* PlacemarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F29FFF26AE392C0043C8E3 /* PlacemarkAnnotation.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +138,8 @@
 		3744603B26AFB9A40053DFEB /* UserRestaurantPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRestaurantPage2.swift; sourceTree = "<group>"; };
 		3744603F26AFCF7E0053DFEB /* MenuItemCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCardView.swift; sourceTree = "<group>"; };
 		3744CC272646227F00A7459D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		374929FB26BC574600354320 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
+		374929FF26BC593D00354320 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		375DDC74269A1C93001CB7E9 /* CharacterProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterProgressRing.swift; sourceTree = "<group>"; };
 		37617FD6264A0C1700237D9F /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		37617FDC264B073500237D9F /* DineOutofTenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DineOutofTenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +169,9 @@
 		37863CBA2574662400EF5A09 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37863CBD257466B800EF5A09 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		37863CC12574941300EF5A09 /* UserRestaurantPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRestaurantPage.swift; sourceTree = "<group>"; };
+		3789F8FB26D411600047E4AD /* NeumorphicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicCard.swift; sourceTree = "<group>"; };
+		3789F8FD26D4121B0047E4AD /* NeumorphicButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicButtonStyles.swift; sourceTree = "<group>"; };
+		3789F8FF26D41D9C0047E4AD /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		378C2A32265DBE67004D847E /* DataEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntryView.swift; sourceTree = "<group>"; };
 		378C2A34265DCC9B004D847E /* NewOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderView.swift; sourceTree = "<group>"; };
 		378D37D3269F6C1900C766F6 /* Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
@@ -177,6 +186,7 @@
 		3794DBDC264DBF96002BECCA /* AddRemoveTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveTag.swift; sourceTree = "<group>"; };
 		3794DBDE264DE9FB002BECCA /* MenuItemStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemStatView.swift; sourceTree = "<group>"; };
 		3794DBE0264DEA56002BECCA /* MenuItemStatViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemStatViewItem.swift; sourceTree = "<group>"; };
+		37A235E926D1E4AA00B4D64F /* NeumorphicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicButton.swift; sourceTree = "<group>"; };
 		37AAC585269E5385003067CC /* EditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTagView.swift; sourceTree = "<group>"; };
 		37AAC58A269E8435003067CC /* TagListViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewProtocol.swift; sourceTree = "<group>"; };
 		37AAC58C269E8645003067CC /* TagListViewModifierButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewModifierButton.swift; sourceTree = "<group>"; };
@@ -198,7 +208,6 @@
 		37CF30C826474708001B9CEE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		37D1380D26A10E8C001EBB86 /* TagColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorPickerView.swift; sourceTree = "<group>"; };
 		37F29FFA26ABBF050043C8E3 /* MKSearchResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKSearchResultsListView.swift; sourceTree = "<group>"; };
-		37F29FFD26AE350E0043C8E3 /* Placemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placemark.swift; sourceTree = "<group>"; };
 		37F29FFF26AE392C0043C8E3 /* PlacemarkAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,7 +231,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				370ED905269151E500C2E6D2 /* OrderedCollections in Frameworks */,
-				374929FA26BB0D2100354320 /* Disk in Frameworks */,
 				370ED903269151E500C2E6D2 /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +265,10 @@
 				3765B96426A9DD160011CD11 /* SearchBar.swift */,
 				3765B96826A9EA140011CD11 /* LoadingIndicator.swift */,
 				370DEC4926B859E8009F8527 /* Home.swift */,
+				3789F8FF26D41D9C0047E4AD /* CustomColor.swift */,
+				37A235E926D1E4AA00B4D64F /* NeumorphicButton.swift */,
+				3789F8FB26D411600047E4AD /* NeumorphicCard.swift */,
+				3789F8FD26D4121B0047E4AD /* NeumorphicButtonStyles.swift */,
 			);
 			path = UIAssets;
 			sourceTree = "<group>";
@@ -294,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				37617FDE264B073500237D9F /* DineOutofTenTests.swift */,
+				374929FB26BC574600354320 /* CodableTests.swift */,
 				37617FE0264B073500237D9F /* Info.plist */,
 			);
 			path = DineOutofTenTests;
@@ -347,8 +360,8 @@
 				376FAF2026A8974E0010EBA6 /* TestData.swift */,
 				37096408264C792000DD4DF8 /* User.swift */,
 				37ACB42C25995E0B00A2B84B /* Restaurant.swift */,
-				37F29FFD26AE350E0043C8E3 /* Placemark.swift */,
 				37F29FFF26AE392C0043C8E3 /* PlacemarkAnnotation.swift */,
+				374929FF26BC593D00354320 /* Location.swift */,
 				37AEAEE6259C0C7800FF45A0 /* MenuItem.swift */,
 				377EDD41264C27A10094D637 /* Order.swift */,
 				37617FD6264A0C1700237D9F /* Rating.swift */,
@@ -628,7 +641,6 @@
 			packageProductDependencies = (
 				370ED902269151E500C2E6D2 /* Collections */,
 				370ED904269151E500C2E6D2 /* OrderedCollections */,
-				374929F926BB0D2100354320 /* Disk */,
 			);
 			productName = "Dine Out of Ten";
 			productReference = 379186A7257349DC00BA58D2 /* Dine Out of Ten.app */;
@@ -667,7 +679,6 @@
 			mainGroup = 3791869E257349DC00BA58D2;
 			packageReferences = (
 				370ED901269151E500C2E6D2 /* XCRemoteSwiftPackageReference "swift-collections" */,
-				374929F826BB0D2100354320 /* XCRemoteSwiftPackageReference "Disk" */,
 			);
 			productRefGroup = 379186A8257349DC00BA58D2 /* Products */;
 			projectDirPath = "";
@@ -712,6 +723,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374929FC26BC574600354320 /* CodableTests.swift in Sources */,
 				37617FDF264B073500237D9F /* DineOutofTenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -730,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37AAC58D269E8645003067CC /* TagListViewModifierButton.swift in Sources */,
+				3789F8FC26D411600047E4AD /* NeumorphicCard.swift in Sources */,
 				3709640F264C826D00DD4DF8 /* RootView.swift in Sources */,
 				37863CBB2574662400EF5A09 /* SettingsView.swift in Sources */,
 				37096418264CA19500DD4DF8 /* RestaurantHeaderView.swift in Sources */,
@@ -743,9 +756,11 @@
 				370DEC4726B856C9009F8527 /* SearchBackgroundPlaceholders.swift in Sources */,
 				37AEAEFD259CF3C700FF45A0 /* RestaurantDashboard.swift in Sources */,
 				37AEAF05259D189300FF45A0 /* RestaurantStatView.swift in Sources */,
+				37492A0026BC593D00354320 /* Location.swift in Sources */,
 				372C4C1226B5C486000104E3 /* TopBar.swift in Sources */,
 				3744603C26AFB9A40053DFEB /* UserRestaurantPage2.swift in Sources */,
 				37F2A00026AE392C0043C8E3 /* PlacemarkAnnotation.swift in Sources */,
+				37A235EA26D1E4AA00B4D64F /* NeumorphicButton.swift in Sources */,
 				37ACB4412599722C00A2B84B /* CoordinateToPlacemark.swift in Sources */,
 				37AAC58B269E8435003067CC /* TagListViewProtocol.swift in Sources */,
 				377EDD54264C545C0094D637 /* ErrorTypes.swift in Sources */,
@@ -764,6 +779,7 @@
 				3707ADA7264EF0C700CEECD3 /* RestaurantRatingView.swift in Sources */,
 				3728FC2B259F9AEA00A08F8E /* NewMenuItemView.swift in Sources */,
 				376FAF2126A8974E0010EBA6 /* TestData.swift in Sources */,
+				3789F90026D41D9C0047E4AD /* CustomColor.swift in Sources */,
 				37AEAEE7259C0C7800FF45A0 /* MenuItem.swift in Sources */,
 				3707ADA5264EC56500CEECD3 /* NewTagViewSheet.swift in Sources */,
 				37ACB43A25996E3B00A2B84B /* RestaurantRow.swift in Sources */,
@@ -789,7 +805,6 @@
 				3744603A26AF9CA00053DFEB /* RestaurantInfoPage.swift in Sources */,
 				3767EAC226AB38CB00DDDDF1 /* MapSearchResultDelegate.swift in Sources */,
 				378D37D4269F6C1900C766F6 /* Mappable.swift in Sources */,
-				37F29FFE26AE350E0043C8E3 /* Placemark.swift in Sources */,
 				379186BF25734D8D00BA58D2 /* RestaurantListView.swift in Sources */,
 				371090E025BC971C0045E765 /* DashboardWidget.swift in Sources */,
 				3744CC282646227F00A7459D /* Model.xcdatamodeld in Sources */,
@@ -802,6 +817,7 @@
 				3767EAC026AA259F00DDDDF1 /* NewTagViewPage.swift in Sources */,
 				37617FD7264A0C1700237D9F /* Rating.swift in Sources */,
 				37AEAEF9259C25D600FF45A0 /* RestaurantMapView.swift in Sources */,
+				3789F8FE26D4121B0047E4AD /* NeumorphicButtonStyles.swift in Sources */,
 				3794DBDD264DBF96002BECCA /* AddRemoveTag.swift in Sources */,
 				37F29FFB26ABBF050043C8E3 /* MKSearchResultsListView.swift in Sources */,
 				371090DB25BC8DDE0045E765 /* StatViewItem.swift in Sources */,
@@ -832,7 +848,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 87J8CA9D99;
 				INFOPLIST_FILE = DineOutofTenTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -854,7 +870,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 87J8CA9D99;
 				INFOPLIST_FILE = DineOutofTenTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1114,16 +1130,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.0.3;
-			};
-		};
-		374929F826BB0D2100354320 /* XCRemoteSwiftPackageReference "Disk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/saoudrizwan/Disk";
-			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.4;
+				minimumVersion = 0.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1138,11 +1146,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 370ED901269151E500C2E6D2 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
-		};
-		374929F926BB0D2100354320 /* Disk */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 374929F826BB0D2100354320 /* XCRemoteSwiftPackageReference "Disk" */;
-			productName = Disk;
 		};
 /* End XCSwiftPackageProductDependency section */
 

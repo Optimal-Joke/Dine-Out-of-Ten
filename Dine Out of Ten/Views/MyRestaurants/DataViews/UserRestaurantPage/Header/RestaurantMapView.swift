@@ -8,36 +8,45 @@
 import SwiftUI
 import MapKit
 
+protocol SmallMapView: View {
+    var coordinate: CLLocationCoordinate2D { get set }
+    
+    init(coordinate: Coordinate)
+}
+
 struct RestaurantMapView: View {
-    var placemark: Placemark?
+    var coordinate: Coordinate
     
     @State private var restaurantRegion = MKCoordinateRegion()
     
-    init(restaurant: Restaurant) {
-        self.placemark = restaurant.location.placemark
+    init(coordinate: Coordinate) {
+        self.coordinate = coordinate
     }
     
     var body: some View {
-        if let placemark = placemark {
-            let region = Binding<MKCoordinateRegion>(get: {
-                MKCoordinateRegion(
-                    center: placemark.coordinate,
-                    span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-                )
-            }, set: { newRegion in
-                restaurantRegion = newRegion
-            })
-            
-            Map(coordinateRegion: region, interactionModes: [], annotationItems: [placemark]) { item in
-                MapPin(coordinate: placemark.coordinate, tint: .red)
-            }
-            .frame(maxHeight: UIScreen.main.bounds.height / 3)
+        Map(coordinateRegion: region, interactionModes: [], annotationItems: [annotation]) { item in
+            MapMarker(coordinate: coordinate.locationCoordinate, tint: .red)
         }
+    }
+    
+    private var region: Binding<MKCoordinateRegion> {
+        Binding<MKCoordinateRegion>(get: {
+            MKCoordinateRegion(
+                center: self.coordinate.locationCoordinate,
+                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+            )
+        }, set: { newRegion in
+            restaurantRegion = newRegion
+        })
+    }
+    
+    private var annotation: LocationAnnotation {
+        LocationAnnotation(coordinate: coordinate)
     }
 }
 
 struct RestaurantMapView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantMapView(restaurant: Restaurant.example)
+        RestaurantMapView(coordinate: Coordinate.example)
     }
 }

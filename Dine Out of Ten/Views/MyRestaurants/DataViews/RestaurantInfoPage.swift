@@ -15,12 +15,7 @@ struct RestaurantInfoPage: View {
     var body: some View {
         NavigationView {
             VStack {
-                RestaurantMapView(restaurant: .example)
-                    .cornerRadius(20)
-                    .padding()
-                    
-                    .frame(height: UIScreen.main.bounds.height / 4)
-                    
+                mapView
                 
                 Text(mapItem.phoneNumber ?? "No Phone Number")
                 Text("Hello World")
@@ -34,6 +29,13 @@ struct RestaurantInfoPage: View {
     
     private var placemark: MKPlacemark {
         mapItem.placemark
+    }
+    
+    private var mapView: some View {
+        Restaurant.example.placemark.coordinate.map(RestaurantMapView.init)
+            .cornerRadius(20)
+            .padding()
+            .frame(height: UIScreen.main.bounds.height / 4)
     }
 }
 

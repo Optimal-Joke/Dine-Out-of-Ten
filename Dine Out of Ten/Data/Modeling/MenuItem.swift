@@ -11,48 +11,44 @@ import SwiftUI
 
 // MARK: Declaration
 final class MenuItem: ObservableObject, Identifiable, Taggable {    
-    var id: UUID
-    var restaurantID: UUID
+    var id: UUID = UUID()
     
     @Published var name: String
-    @Published var menuDescription: String
+    @Published var menuDescription: String = ""
     
-    @Published var wouldOrderAgain: WouldOrderAgain
-    @Published var tips: String
+    @Published var tags: OrderedSet<Tag> = OrderedSet<Tag>()
+    @Published var orders: [Order] = [Order]()
     
-    @Published var tags: OrderedSet<Tag>
-    @Published var orders: [Order]
+    @Published var wouldOrderAgain: WouldOrderAgain = .notSpecified
+    @Published var tips: String = ""
     
-    init(name: String, description: String, restaurant: Restaurant) {
-        self.id = UUID()
-        self.restaurantID = restaurant.id
+    init(name: String) {
         self.name = name
+    }
+    
+    convenience init(name: String, description: String) {
+        self.init(name: name)
         self.menuDescription = description
-        self.wouldOrderAgain = .notSpecified
-        self.tips = ""
         self.tags = OrderedSet<Tag>()
         self.orders = [Order]()
+        self.wouldOrderAgain = .notSpecified
+        self.tips = ""
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         id = try container.decode(UUID.self, forKey: .id)
-        restaurantID = try container.decode(UUID.self, forKey: .restaurantID)
         name = try container.decode(String.self, forKey: .name)
         menuDescription = try container.decode(String.self, forKey: .menuDescription)
-        wouldOrderAgain = try container.decode(WouldOrderAgain.self, forKey: .wouldOrderAgain)
-        tips = try container.decode(String.self, forKey: .tips)
         tags = try container.decode(OrderedSet<Tag>.self, forKey: .tags)
         orders = try container.decode([Order].self, forKey: .orders)
-    }
-    
-    convenience init(name: String, restaurant: Restaurant) {
-        self.init(name: name, description: "", restaurant: restaurant)
+        wouldOrderAgain = try container.decode(WouldOrderAgain.self, forKey: .wouldOrderAgain)
+        tips = try container.decode(String.self, forKey: .tips)
     }
     
     convenience init(tags: OrderedSet<Tag>) {
-        self.init(name: "Placeholder", description: "", restaurant: Restaurant.example)
+        self.init(name: "Placeholder", description: "")
         self.tags.append(contentsOf: tags)
     }
     
@@ -62,13 +58,8 @@ final class MenuItem: ObservableObject, Identifiable, Taggable {
 }
 
 extension MenuItem: Equatable {
-//    public func hash(into hasher: inout Hasher) {
-//        hasher.combine(ObjectIdentifier(self).hashValue)
-//    }
-    
     static func == (lhs: MenuItem, rhs: MenuItem) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.restaurantID == rhs.restaurantID
+        return lhs.name == rhs.name // TODO: Check that this does indeed verify uniqueness
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RestaurantRatingDisplay: View {
-    var restaurant: Restaurant
+    @EnvironmentObject var restaurant: Restaurant
     
     var body: some View {
         VStack {

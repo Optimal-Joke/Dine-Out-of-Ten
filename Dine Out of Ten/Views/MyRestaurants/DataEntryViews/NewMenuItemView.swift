@@ -9,8 +9,6 @@ import SwiftUI
 import OrderedCollections
 
 struct NewMenuItemView: View {
-//    @State private var newItem: MenuItem
-    
     @State private var restaurantName = ""
     
     @State private var itemName = ""
@@ -37,7 +35,8 @@ struct NewMenuItemView: View {
         
     }
     
-    /// This doesn't work. TODO: Make this work
+    // This doesn't work.
+    // TODO: Make this work
     init(for restaurant: Restaurant) {
         self.restaurantName = restaurant.name
     }
@@ -123,11 +122,12 @@ struct NewMenuItemView: View {
                                     item.addOrder(withRating: itemRating, atPrice: actualPrice, withNotes: orderComments)
                                 }
                             } else {
-                                let newItem = MenuItem(name: itemName, description: itemDescription, restaurant: restaurant)
+                                let newItem = MenuItem(name: itemName, description: itemDescription)
                                 if let actualPrice = Double(itemPrice) {
                                     newItem.addOrder(withRating: itemRating, atPrice: actualPrice, withNotes: orderComments)
                                 }
                             }
+                            user.save()
                             self.presentationMode.wrappedValue.dismiss()
                         } else {
                             userInputAlert(title: "Invalid Restaurant Name", message: "Please enter the exact name of a restaurant you've ordered from before")

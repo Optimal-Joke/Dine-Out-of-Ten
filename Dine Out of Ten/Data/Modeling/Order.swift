@@ -29,6 +29,10 @@ struct Order: Identifiable {
     init(of item: MenuItem, withRating rating: Int) {
         self.init(of: item, withRating: rating, atPrice: nil, withNotes: nil)
     }
+    
+    static var example: Order {
+        Order(of: MenuItem.example, withRating: 9, atPrice: 9.99, withNotes: "Test note.")
+    }
 }
 
 extension Order: Equatable, Hashable {

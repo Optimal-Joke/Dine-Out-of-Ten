@@ -22,6 +22,10 @@ struct Tag: Identifiable {
         self.label = (label == "") ? "🧐 Preview" : label
         self.colors = colors
     }
+    
+    static var example: Tag {
+        Tag(label: "Example Tag", colors: [.red, .green, .blue])
+    }
 }
 
 extension Tag: Equatable, Hashable {

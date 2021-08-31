@@ -16,57 +16,61 @@ extension User {
     }
     
     internal func generateTestData(ordersPerItem: Int) {
-        // Define test restaurants
-        let tenaflyDiner = Restaurant(name: "Tenafly Diner")
-        tenaflyDiner.location = Location(address: "16 W Railroad Ave, Tenafly, NJ 07670")
-        tenaflyDiner.location.placemark = Placemark(coordinate: CLLocationCoordinate2D(latitude: 40.92553, longitude: 73.96485))
+        // MARK: Test Data
+        let testRestaurant = Restaurant(name: "Tenafly Diner")
+        let testPlacemark = Placemark(latitude: 40.92553, longitude: 73.96485)
+        let testRestaurantTag = Tag(label: "Test Restaurant Tag", colors: [.red])
+        let testMenuItemTag = Tag(label: "Test MenuItem Tag", colors: [.blue])
+                
+        let testMenuItem = MenuItem(name: "Fish and Chips", description: "Cod with a side of french fries")
         
-        // Add test restaurants to user
-        self.restaurants.append(tenaflyDiner)
+        // MARK: Assembling Data
+        testRestaurant.placemark = testPlacemark
+        try! self.addTag(testRestaurantTag, to: testRestaurant)
+        self.restaurants.append(testRestaurant)
         
-        // Define test menu items
-        let fishNchips     = MenuItem(name: "Fish and Chips", description: "Cod with a side of french fries", restaurant: tenaflyDiner)
-        let potatoSkins    = MenuItem(name: "Potato Skins", description: "Potehto boats", restaurant: tenaflyDiner)
+        try! self.addTag(testMenuItemTag, to: testMenuItem)
         
-        // Add tags to items
-        self.addTag(label: "🐟 Seafood", colors: [.orange], to: fishNchips)
-        self.addTag(label: "Entree", colors: [.yellow], to: fishNchips)
-        self.addTag(label: "Favorite", colors: [.blue], to: fishNchips)
-        self.addTag(label: "England", colors: [.red], to: fishNchips)
-        self.addTag(label: "Comes With Side", colors: [.green], to: fishNchips)
-        self.addTag(label: "Fried", colors: [.pink], to: fishNchips)
-        
-        // Add tags to restaurants
-        for i in 1...5 {
-            self.addTag(label: "Tag \(i)", colors: [.random, .random], to: tenaflyDiner)
-        }
-        
-        // Order once + add items to restaurants
-        tenaflyDiner.orderItem(fishNchips, withRating: 10, atPrice: 14.99, withNotes: "This was amazing")
-        tenaflyDiner.orderItem(potatoSkins, withRating: 5, atPrice: 5.99, withNotes: "Cammy likes this")
+        testRestaurant.orderItem(testMenuItem, withRating: 10, atPrice: 14.99, withNotes: "This was amazing")
         
         // Order ordersPerItem more times
         for i in 2...ordersPerItem {
-            tenaflyDiner.orderItem(fishNchips, withRating: i, atPrice: Double.random(in: 10.99...17.99), withNotes: "Test Note \(i) for \(fishNchips.name)")
-            tenaflyDiner.orderItem(potatoSkins, withRating: i, atPrice: Double.random(in: 3.99...6.99), withNotes: "Test Note \(i) for \(potatoSkins.name)")
+            testRestaurant.orderItem(testMenuItem, withRating: i, atPrice: Double.random(in: 10.99...17.99), withNotes: "Test Note \(i) for \(testMenuItem.name)")
         }
-        
-        for i in 1...10 {
-            tenaflyDiner.orderItem(MenuItem(name: "Test Order \(i)", restaurant: tenaflyDiner), withRating: 8)
-        }
+    }
+}
+
+
+extension User {
+    static var example: User {
+        User(testOrdersPerItem: 10)
     }
 }
 
 // MARK: Restaurant
 extension Restaurant {
-    internal static var example: Restaurant {
-        User(testOrdersPerItem: 10).restaurants[0]
+    static var example: Restaurant {
+        User.example.restaurants[0]
+    }
+}
+
+// MARK: Placemark
+extension Placemark {
+    static var example: Placemark {
+        Restaurant.example.placemark
     }
 }
 
 // MARK: MenuItem
 extension MenuItem {
-    internal static var example: MenuItem {
-        User(testOrdersPerItem: 10).restaurants[0].menuItems[0]
+    static var example: MenuItem {
+        Restaurant.example.menuItems[0]
+    }
+}
+
+// MARK: Coordinate
+extension Coordinate {
+    static var example: Coordinate {
+        Restaurant.example.placemark.coordinate!
     }
 }

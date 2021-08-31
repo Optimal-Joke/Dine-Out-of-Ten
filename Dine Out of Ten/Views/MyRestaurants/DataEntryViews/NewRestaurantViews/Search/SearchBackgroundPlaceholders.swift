@@ -65,7 +65,7 @@ struct FailedSearchBackground: View {
 struct AlternateSearchOptionButtons: View {
     var body: some View {
         VStack {
-            // ADD SUPPORT FOR NEARBY LOCATION FINDING
+            // TODO: ADD SUPPORT FOR NEARBY LOCATION FINDING
             //            NavigationLink(destination: NewRestaurantNearby()) {
             //                Text("Search around your location")
             //                    .padding([.vertical, .horizontal], 10)
@@ -78,12 +78,21 @@ struct AlternateSearchOptionButtons: View {
             //                .multilineTextAlignment(.center)
             //                .padding([.top, .bottom], 4)
             
-            NavigationLink(destination: NewRestaurantInfoView()) {
-                Text("Add restaurant manually")
-                    .padding([.vertical, .horizontal], 10)
-                    .background(Color(UIColor.systemGray5))
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-            }
+            AlternateSearchOptionButton(text: "Add restaurant manually", destination: NewRestaurantInfoView())
+        }
+    }
+}
+
+struct AlternateSearchOptionButton<Content: View>: View {
+    var text: String
+    var destination: Content
+        
+    var body: some View {
+        NavigationLink(destination: destination) {
+            Text(text)
+                .padding([.vertical, .horizontal], 10)
+                .background(Color(UIColor.systemGray5))
+                .clipShape(RoundedRectangle(cornerRadius: 15))
         }
     }
 }

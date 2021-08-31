@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserMenuItemPage: View {
-    @ObservedObject var item: MenuItem
+    @StateObject var item: MenuItem
     
     @EnvironmentObject var user: User
     
@@ -27,7 +27,7 @@ struct UserMenuItemPage: View {
                 }
                     .padding(.horizontal, 15)
                 
-                MenuItemStatView(item: item)
+                MenuItemStatView()
                 
                 TipsView(text: $item.tips)
                     .padding(.horizontal)
@@ -77,6 +77,7 @@ struct UserMenuItemPage: View {
             }
             
         }
+        .environmentObject(item)
     }
     
     private func tap(order: Order) {

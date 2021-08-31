@@ -8,13 +8,23 @@
 import UIKit
 import MapKit
 
-final class LandmarkAnnotation: NSObject, MKAnnotation {
+final class LocationAnnotation: NSObject, MKAnnotation, Identifiable {
     let title: String?
     let coordinate: CLLocationCoordinate2D
     
-    init(placemark: Placemark) {
-        self.title = placemark.name
-        self.coordinate = placemark.coordinate
+    init(coordinate: Coordinate) {
+        self.title = nil
+        self.coordinate = coordinate.locationCoordinate
+    }
+    
+    init?(placemark: Placemark) {
+        if let coordinate = placemark.coordinate {
+            self.title = placemark.name
+            self.coordinate = coordinate.locationCoordinate
+            return
+        }
+        
+        return nil
     }
 }
 

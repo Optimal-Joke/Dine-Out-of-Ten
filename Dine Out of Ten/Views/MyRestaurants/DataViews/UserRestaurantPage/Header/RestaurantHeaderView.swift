@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RestaurantHeaderView: View {
-    var restaurant: Restaurant
+    @EnvironmentObject var restaurant: Restaurant
     
     @Binding var addTagViewShowing: Bool
     
@@ -27,7 +27,7 @@ struct RestaurantHeaderView: View {
                 
                 Spacer()
                 
-                RestaurantRatingDisplay(restaurant: restaurant)
+                RestaurantRatingDisplay()
             }
                         
             ItemTagListView(for: restaurant, trailingButtonMode: .dynamic(primaryLabel: "Edit Tags...", secondaryLabel: "Add Tags...")) {

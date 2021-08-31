@@ -17,6 +17,10 @@ struct Rating {
     init(_ value: Int) {
         self.init(Float(value))
     }
+    
+    static var example: Rating {
+        Rating(9)
+    }
 }
 
 extension Rating: Equatable, Comparable {

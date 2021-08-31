@@ -36,9 +36,9 @@ struct NewOrderView: View {
                             .multilineTextAlignment(.center)
                         Text("at")
                             .font(.headline.weight(.regular))
-                        Text(restaurant.name)
-                            .font(.title.weight(.heavy))
-                            .multilineTextAlignment(.center)
+//                        Text(restaurant.name)
+//                            .font(.title.weight(.heavy))
+//                            .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.top, 40)
@@ -123,11 +123,9 @@ struct NewOrderView: View {
         }
     }
     
-    var restaurant: Restaurant {
-        user.getRestaurant(withID: item.restaurantID)
-    }
-    
-    
+//    var restaurant: Restaurant {
+//        user.getRestaurant(withID: item.restaurantID)
+//    }
     
     func orderItem() {
         item.addOrder(withRating: orderRating, atPrice: 0.00, withNotes: orderNotes)

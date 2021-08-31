@@ -12,7 +12,7 @@ import MapKit
 // MARK: Restaurant
 extension Restaurant: Codable {
     enum CodingKeys: CodingKey {
-        case id, name, tags, menuItems, location
+        case id, name, tags, menuItems, placemark
     }
 
     func encode(to encoder: Encoder) throws {
@@ -22,9 +22,7 @@ extension Restaurant: Codable {
         try container.encode(name, forKey: .name)
         try container.encode(tags, forKey: .tags)
         try container.encode(menuItems, forKey: .menuItems)
-        try container.encode(location, forKey: .location)
-//        try container.encode(address, forKey: .address)
-//        try container.encode(placemark, forKey: .placemark)
+        try container.encode(placemark, forKey: .placemark)
     }
 }
 
@@ -39,7 +37,7 @@ extension MenuItem: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(id, forKey: .id)
-        try container.encode(restaurantID, forKey: .restaurantID)
+//        try container.encode(restaurantID, forKey: .restaurantID)
         try container.encode(name, forKey: .name)
         try container.encode(menuDescription, forKey: .menuDescription)
         try container.encode(wouldOrderAgain, forKey: .wouldOrderAgain)
@@ -50,18 +48,18 @@ extension MenuItem: Codable {
 }
 
 // MARK: - Location
-extension Location: Codable {
-    enum CodingKeys: CodingKey {
-        case address, placemark
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encode(address, forKey: .address)
-        try container.encode(placemark, forKey: .placemark)
-    }
-}
+//extension Location: Codable {
+//    enum CodingKeys: CodingKey {
+//        case address, placemark
+//    }
+//    
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        
+//        try container.encode(address, forKey: .address)
+//        try container.encode(placemark, forKey: .placemark)
+//    }
+//}
 
 // MARK: - Color
 extension Color: Codable {
@@ -132,4 +130,65 @@ extension Color: Codable {
         return lightness >= 2
     }
 }
+
+// MARK: - Placemark
+extension Placemark: Codable {
+    enum CodingKeys: CodingKey {
+        /// The name of the placemark.
+        case name
+        /// The coordinate object containing latitude and longitude information.
+        case coordinate
+        /// The address of the placemark, as set by the user.
+        case address
+        /// The abbreviated country or region name.
+        case isoCountryCode
+        /// The name of the country or region associated with the placemark.
+        case country
+        /// The postal code associated with the placemark.
+        case postalCode
+        /// The state or province associated with the placemark.
+        case administrativeArea
+        /// Additional administrative area information for the placemark.
+        case subAdministrativeArea
+        /// The city associated with the placemark.
+        case locality
+        /// Additional city-level information for the placemark.
+        case subLocality
+        /// The street address associated with the placemark.
+        case thoroughfare
+        /// Additional street-level information for the placemark.
+        case subThoroughfare
+        /// The time zone associated with the placemark.
+        case timeZone
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(name, forKey: .name)
+        try container.encode(coordinate, forKey: .coordinate)
+        try container.encode(address, forKey: .address)
+        try container.encode(isoCountryCode, forKey: .isoCountryCode)
+        try container.encode(country, forKey: .country)
+        try container.encode(postalCode, forKey: .postalCode)
+        try container.encode(administrativeArea, forKey: .administrativeArea)
+        try container.encode(subAdministrativeArea, forKey: .subAdministrativeArea)
+        try container.encode(locality, forKey: .locality)
+        try container.encode(subLocality, forKey: .subLocality)
+        try container.encode(thoroughfare, forKey: .thoroughfare)
+        try container.encode(subThoroughfare, forKey: .subThoroughfare)
+        try container.encode(timeZone, forKey: .timeZone)
+    }
+}
+
+//// MARK: - CLLocation
+//extension CLLocation: Codable {
+//    public func encode(to encoder: Encoder) throws {
+//        <#code#>
+//    }
+//
+//    public convenience init(from decoder: Decoder) throws {
+//        <#code#>
+//    }
+//}
 

@@ -18,11 +18,9 @@ struct UserRestaurantPage: View {
     var body: some View {
         ZStack {
             ScrollView {
-                RestaurantMapView(restaurant: restaurant)
-                    .ignoresSafeArea(edges: .top)
-                    .frame(height: 170)
+                mapView
                 
-                RestaurantHeaderView(restaurant: restaurant, addTagViewShowing: $addTagViewShowing)
+                RestaurantHeaderView(addTagViewShowing: $addTagViewShowing)
                     .padding(.horizontal)
                     
                 HStack {
@@ -76,6 +74,12 @@ struct UserRestaurantPage: View {
             
 //            if addTagViewShowing { AddTagView(item: restaurant) }
         }
+    }
+    
+    private var mapView: some View {
+        restaurant.placemark.coordinate.map(RestaurantMapView.init)
+            .ignoresSafeArea(edges: .top)
+            .frame(height: 170)
     }
 }
 

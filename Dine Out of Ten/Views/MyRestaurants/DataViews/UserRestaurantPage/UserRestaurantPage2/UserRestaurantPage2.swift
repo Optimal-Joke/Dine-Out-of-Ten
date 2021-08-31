@@ -8,47 +8,50 @@
 import SwiftUI
 
 struct UserRestaurantPage2: View {
-    var restaurant: Restaurant
+    @StateObject var restaurant: Restaurant
 
     var body: some View {
         GeometryReader { g in
             let topEdgeOfPage = g.safeAreaInsets.top
 
-            UserRestaurantPage3(restaurant: restaurant, topEdge: topEdgeOfPage)
+            UserRestaurantPage3(topEdge: topEdgeOfPage)
                 .ignoresSafeArea(.all, edges: .top)
-                .navigationBarTitle("")
+                .navigationBarTitle(restaurant.name)
                 .navigationBarHidden(true)
         }
+        .environmentObject(restaurant)
     }
 }
 
 struct UserRestaurantPage3: View {
-    var restaurant: Restaurant
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var restaurant: Restaurant
+    @EnvironmentObject var user: User
     var topEdge: CGFloat
 
     var headerMaxHeight: CGFloat {
-        UIScreen.main.bounds.height / 2 + topEdge / 2
+        UIScreen.main.bounds.height / 3 + topEdge / 2
     }
 
     @State private var offsetAmount: CGFloat = 0
 
 //    @State private var sheetSelection: DataEntryView? = nil
     @State private var showNewMenuItemView = false
+    
+//    @State private var showEditTagsView = falsex
 
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         ZStack {
-            Color.red
+            backgroundColor
                 .edgesIgnoringSafeArea(.all)
             
             ScrollView(.vertical, showsIndicators: false) {
-
                 VStack(spacing: 15) {
-
+                    /// Page header
                     GeometryReader { g in
-
-                        TopBar(restaurant: restaurant, topEdge: topEdge, offset: $offsetAmount, maxHeight: headerMaxHeight)
+                        TopBar(topEdge: topEdge, offset: $offsetAmount, maxHeight: headerMaxHeight)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             // sticky effect
@@ -62,7 +65,6 @@ struct UserRestaurantPage3: View {
                                     Button {
                                         self.presentationMode.wrappedValue.dismiss()
                                     } label: {
-    //                                        Label("Back", systemImage: "chevron.left")
                                         Image(systemName: "arrow.backward")
                                     }
                                     .font(.body.weight(.medium))
@@ -105,6 +107,7 @@ struct UserRestaurantPage3: View {
                     .offset(y: -offsetAmount)
                     .zIndex(1)
 
+                    /// Menu items
                     VStack(spacing: 10) {
                         ForEach(restaurant.menuItems) { menuItem in
                             MenuItemCardView(item: menuItem)
@@ -112,24 +115,28 @@ struct UserRestaurantPage3: View {
                     }
                     .padding(.horizontal)
                     .zIndex(0)
-//                    .sheet(isPresented: $showNewMenuItemView) {
-//                        NewMenuItemView(for: restaurant)
-//                    }
-                    
-    //                .sheet(item: $sheetSelection) { selectedTarget in
-    //                    switch selectedTarget {
-    //                    case .NewItemView:
-    //                        NewMenuItemView(for: restaurant)
-    //                    default:
-    //                        EmptyView()
-    //                    }
-    //                }
+                    .sheet(isPresented: $showNewMenuItemView) {
+                        NewMenuItemView(for: restaurant)
+                    }
                 }
                 .offset($offsetAmount)
                 
             }
             .coordinateSpace(name: "SCROLL")
         }
+    }
+    
+//    private func getHeaderMaxHeight(in proxy: GeometryProxy) -> CGFloat {
+//        
+//    }
+    
+    // calculating opacity
+    private func getOpacity() -> CGFloat {
+        let progress = -(90 + offsetAmount + topEdge) / 40
+        
+        let opacity = 1 - progress
+        
+        return -offsetAmount > (90 + topEdge) ? opacity : 1
     }
 
     private func getHeaderHeight() -> CGFloat {
@@ -154,8 +161,11 @@ struct UserRestaurantPage3: View {
 
         return -offsetAmount > (140 + topEdge) ? opacity : 0
     }
+    
+    private var backgroundColor: Color {
+        colorScheme == .light ? BackgroundColor.light.start : BackgroundColor.dark.start
+    }
 }
-
 
 struct UserRestaurantPage2_Previews: PreviewProvider {
     static var previews: some View {

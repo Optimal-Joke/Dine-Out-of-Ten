@@ -22,6 +22,11 @@ struct RestaurantListView: View {
             .onDelete(perform: removeItems)
         }
         .navigationBarTitle(Text("My Restaurants"), displayMode: .large)
+        .task {
+            do {
+                user.loadData()
+            }
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Menu {
