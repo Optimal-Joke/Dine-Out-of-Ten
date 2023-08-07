@@ -22,10 +22,8 @@ struct UserMenuItemPage: View {
     var body: some View {
         ZStack {
             ScrollView {
-                ItemTagListView(for: item, size: .medium,trailingButtonMode: .dynamic(primaryLabel: "Edit Tags...", secondaryLabel: "Add Tags...")) {
-                    addTagViewShowing = true
-                }
-                    .padding(.horizontal, 15)
+                TagCloud(for: item)
+                    .padding(.horizontal)
                 
                 MenuItemStatView()
                 
@@ -128,5 +126,7 @@ struct ListRowModifier: ViewModifier {
 struct MenuItemPage_Previews: PreviewProvider {
     static var previews: some View {
         UserMenuItemPage(item: MenuItem.example)
+            .environmentObject(User.example)
+            .environmentObject(Restaurant.example)
     }
 }

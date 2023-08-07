@@ -121,7 +121,7 @@ extension UserTagListView {
         
         return ZStack(alignment: .topLeading) {
             ForEach(tags) { tag in
-                TappableTagView(for: tag, item: item, size: size) {
+                TappableTagView(for: tag, item: item) {
                     item.addTag(tag)
                 }
                     .padding([.horizontal, .vertical], 2)

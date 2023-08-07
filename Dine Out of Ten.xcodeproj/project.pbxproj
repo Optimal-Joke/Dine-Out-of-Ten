@@ -93,6 +93,7 @@
 		37AEAF05259D189300FF45A0 /* RestaurantStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AEAF04259D189300FF45A0 /* RestaurantStatView.swift */; };
 		37CD9EE726A522C600B69B30 /* AddRemoveRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CD9EE626A522C600B69B30 /* AddRemoveRestaurant.swift */; };
 		37CF30C926474708001B9CEE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CF30C826474708001B9CEE /* PersistenceController.swift */; };
+		37D044AB2775631800067670 /* TagCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D044AA2775631800067670 /* TagCloud.swift */; };
 		37D1380E26A10E8C001EBB86 /* TagColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1380D26A10E8C001EBB86 /* TagColorPickerView.swift */; };
 		37F29FFB26ABBF050043C8E3 /* MKSearchResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F29FFA26ABBF050043C8E3 /* MKSearchResultsListView.swift */; };
 		37F2A00026AE392C0043C8E3 /* PlacemarkAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F29FFF26AE392C0043C8E3 /* PlacemarkAnnotation.swift */; };
@@ -206,6 +207,7 @@
 		37AEAF04259D189300FF45A0 /* RestaurantStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStatView.swift; sourceTree = "<group>"; };
 		37CD9EE626A522C600B69B30 /* AddRemoveRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveRestaurant.swift; sourceTree = "<group>"; };
 		37CF30C826474708001B9CEE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		37D044AA2775631800067670 /* TagCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagCloud.swift; path = ../../../../../../../TagCloud.swift; sourceTree = "<group>"; };
 		37D1380D26A10E8C001EBB86 /* TagColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagColorPickerView.swift; sourceTree = "<group>"; };
 		37F29FFA26ABBF050043C8E3 /* MKSearchResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKSearchResultsListView.swift; sourceTree = "<group>"; };
 		37F29FFF26AE392C0043C8E3 /* PlacemarkAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkAnnotation.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 			children = (
 				37AAC58A269E8435003067CC /* TagListViewProtocol.swift */,
 				37AAC58C269E8645003067CC /* TagListViewModifierButton.swift */,
+				37D044AA2775631800067670 /* TagCloud.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37AAC58D269E8645003067CC /* TagListViewModifierButton.swift in Sources */,
+				37D044AB2775631800067670 /* TagCloud.swift in Sources */,
 				3789F8FC26D411600047E4AD /* NeumorphicCard.swift in Sources */,
 				3709640F264C826D00DD4DF8 /* RootView.swift in Sources */,
 				37863CBB2574662400EF5A09 /* SettingsView.swift in Sources */,

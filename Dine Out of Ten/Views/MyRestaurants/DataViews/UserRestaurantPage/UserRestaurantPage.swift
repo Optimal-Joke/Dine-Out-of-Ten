@@ -86,5 +86,6 @@ struct UserRestaurantPage: View {
 struct RestaurantPage_Previews: PreviewProvider {
     static var previews: some View {
         UserRestaurantPage(restaurant: Restaurant.example)
+            .environmentObject(Restaurant.example)
     }
 }

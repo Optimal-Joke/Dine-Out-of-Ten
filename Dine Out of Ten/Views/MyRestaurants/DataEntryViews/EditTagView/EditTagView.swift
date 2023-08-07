@@ -24,7 +24,7 @@ struct EditTagView<T>: View where T: ObservableObject, T: Taggable {
                                    .buttonStyle(BorderlessButtonStyle())
                                    .padding(.horizontal)
             } else {
-                StaticTagView(for: Tag(label: "No Tags Yet 🤨", colors: [.red]), item: MenuItem.example, size: .small)
+                StaticTagView(for: Tag(label: "No Tags Yet 🤨", colors: [.red]), item: MenuItem.example)
             }
             
             Divider()

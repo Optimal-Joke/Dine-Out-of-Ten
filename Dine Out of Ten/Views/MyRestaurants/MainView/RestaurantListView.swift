@@ -15,7 +15,7 @@ struct RestaurantListView: View {
     var body: some View {
         Form {
             ForEach(user.restaurants) { restaurant in
-                NavigationLink(destination: UserRestaurantPage2(restaurant: restaurant)) {
+                NavigationLink(destination: UserRestaurantPage(restaurant: restaurant)) {
                     RestaurantRow(restaurant: restaurant)
                 }
             }

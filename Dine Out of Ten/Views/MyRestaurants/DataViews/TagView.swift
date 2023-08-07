@@ -12,122 +12,83 @@ fileprivate protocol TagView: View {
     
     var tag: Tag { get set }
     var item: T { get set }
-    var size: TagViewSize { get set }
     
-    init(for tag: Tag, item: T, size: TagViewSize)
+    init(for tag: Tag, item: T)
 }
 
-extension TagView {
-    var labelFont: Font {
-        switch size {
-        case .small:
-            return Font.caption
-        case .medium:
-            return Font.callout
-        case .large:
-            return Font.title3
-        }
+fileprivate protocol TagViewRepresentable: View { }
+
+struct TagButtonView<T: Taggable>: TagView, TagViewRepresentable {
+    var tag: Tag
+    var item: T
+
+    init(for tag: Tag, item: T) {
+        self.tag = tag
+        self.item = item
     }
     
-    var horizontalPadding: CGFloat {
-        switch size {
-        case .small:
-            return 8
-        case .medium:
-            return 10
-        case .large:
-            return 12
+    var body: some View {
+        Button(tag.label, role: .destructive) {
+            
         }
+        .buttonStyle(.borderedProminent)
+        .tint(tag.colors[0])
+        .controlSize(.small)
+        .cornerRadius(5)
+    }
+}
+
+struct AddTagButton: TagViewRepresentable {
+    var body: some View {
+        Button("Add Tag...") {
+            showAddTagView()
+        }
+        .controlSize(.small)
     }
     
-    var verticalPadding: CGFloat {
-        switch size {
-        case .small:
-            return 6
-        case .medium:
-            return 7
-        case .large:
-            return 8
-        }
-    }
-    
-    var cornerRadius: CGFloat {
-        switch size {
-        case .small:
-            return 8
-        case .medium:
-            return 10
-        case .large:
-            return 12
-        }
-    }
-    
-    var xFont: Font {
-        switch size {
-        case .small:
-            return Font.caption.weight(.bold)
-        case .medium:
-            return Font.callout.weight(.semibold)
-        case .large:
-            return Font.title3.weight(.semibold)
-        }
+    func showAddTagView() {
+        
     }
 }
 
 // MARK: - StaticTagView
 struct StaticTagView<T: Taggable>: TagView {
     var tag: Tag
-    
     var item: T
     
-    var size: TagViewSize
-    
-    init(for tag: Tag, item: T, size: TagViewSize = .small) {
+    init(for tag: Tag, item: T) {
         self.tag = tag
         self.item = item
-        self.size = size
     }
     
     var body: some View {
         Text(tag.label)
-            .font(labelFont)
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, verticalPadding)
             .foregroundColor(.white)
             .background(tag.color)
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
 
 // MARK: - TappableTagView
 struct TappableTagView<T: Taggable>: TagView {
     var tag: Tag
-    
     var item: T
-    
-    var size: TagViewSize
     
     var addAction: () -> Void = { }
     
-    init(for tag: Tag, item: T, size: TagViewSize = .small) {
+    init(for tag: Tag, item: T) {
         self.tag = tag
         self.item = item
-        self.size = size
     }
     
-    init(for tag: Tag, item: T, size: TagViewSize = .small, addAction: @escaping () -> Void) {
-        self.init(for: tag, item: item, size: size)
+    init(for tag: Tag, item: T, addAction: @escaping () -> Void) {
+        self.init(for: tag, item: item)
         self.addAction = addAction
     }
     
     var body: some View {
         Text(tag.label)
-            .font(labelFont)
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, verticalPadding)
             .foregroundColor(.white)
             .background(tag.color)
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .onTapGesture {
                 withAnimation(.easeOut(duration: 0.2)) {
                     addAction()
@@ -142,27 +103,20 @@ struct DeletableTagView<T: Taggable>: TagView {
     @EnvironmentObject var user: User
     
     var tag: Tag
-    
     var item: T
-    
-    var size: TagViewSize
-    
     var deletable: Bool = false
-        
     var deleteWithConfirmation: Bool = true
-    
     var deleteAction: () -> Void = { }
     
     @State private var showDeletionActionSheet = false
     
-    init(for tag: Tag, item: T, size: TagViewSize = .small) {
+    init(for tag: Tag, item: T) {
         self.tag = tag
         self.item = item
-        self.size = size
     }
     
-    init(for tag: Tag, item: T, size: TagViewSize = .small, deletable: Bool, withDeleteConfirmation: Bool, deleteAction: @escaping () -> Void ) {
-        self.init(for: tag, item: item, size: size)
+    init(for tag: Tag, item: T, deletable: Bool, withDeleteConfirmation: Bool, deleteAction: @escaping () -> Void ) {
+        self.init(for: tag, item: item)
         self.deletable = deletable
         self.deleteWithConfirmation = withDeleteConfirmation
         self.deleteAction = deleteAction
@@ -171,7 +125,6 @@ struct DeletableTagView<T: Taggable>: TagView {
     var body: some View {
         HStack {
             Text(tag.label)
-                .font(labelFont)
             
             if deletable {
                 Button {
@@ -181,16 +134,12 @@ struct DeletableTagView<T: Taggable>: TagView {
                 } label: {
                     HStack {
                         Image(systemName: "xmark")
-                            .font(xFont)
                     }
                 }
             }
         }
-        .padding(.horizontal, horizontalPadding)
-        .padding(.vertical, verticalPadding)
         .foregroundColor(.white)
         .background(tag.color)
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
         .animation(.easeOut(duration: 0.2), value: deletable)
         .confirmationDialog("How do you want to remove this tag?", isPresented: $showDeletionActionSheet) {
             Button("Remove Tag from Item") {
@@ -230,6 +179,8 @@ struct TagView_Previews: PreviewProvider {
     static var testTag4 = Tag(label: "🥤 Drink", colors: [.pink, .mint])
     
     static var previews: some View {
-        DeletableTagView(for: testTag1, item: MenuItem.example, size: .large, deletable: true, withDeleteConfirmation: false, deleteAction: { })
+        TagCloud(for: MenuItem.example)
+//        ButtonTagView(for: MenuItem.example.tags[0], item: MenuItem.example)
+//            .padding()
     }
 }

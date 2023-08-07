@@ -20,7 +20,8 @@ extension User {
         let testRestaurant = Restaurant(name: "Tenafly Diner")
         let testPlacemark = Placemark(latitude: 40.92553, longitude: 73.96485)
         let testRestaurantTag = Tag(label: "Test Restaurant Tag", colors: [.red])
-        let testMenuItemTag = Tag(label: "Test MenuItem Tag", colors: [.blue])
+        let testMenuItemTag1 = Tag(label: "Test 1", colors: [.blue])
+        let testMenuItemTag2 = Tag(label: "Test 2", colors: [.teal])
                 
         let testMenuItem = MenuItem(name: "Fish and Chips", description: "Cod with a side of french fries")
         
@@ -29,7 +30,8 @@ extension User {
         try! self.addTag(testRestaurantTag, to: testRestaurant)
         self.restaurants.append(testRestaurant)
         
-        try! self.addTag(testMenuItemTag, to: testMenuItem)
+        try! self.addTag(testMenuItemTag1, to: testMenuItem)
+        try! self.addTag(testMenuItemTag2, to: testMenuItem)
         
         testRestaurant.orderItem(testMenuItem, withRating: 10, atPrice: 14.99, withNotes: "This was amazing")
         

@@ -35,8 +35,7 @@ struct NewTagViewSheet<T: Taggable>: View {
                 VStack {
                     ZStack {
                         StaticTagView(for: Tag(label: tagName, colors: makeColorArray()),
-                                item: MenuItem.example,
-                                size: .large)
+                                item: MenuItem.example)
                             .padding()
                             .offset(x: 0, y: -25)
                         
